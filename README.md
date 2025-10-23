@@ -1,12 +1,12 @@
 # PyP100
 
-PyP100 is a Python library for controlling many of the TP-Link Tapo devices including the P100, P105, P110 plugs and the
-L530 and L510E bulbs.
+PyP100 is a Python library for controlling TP-Link Tapo smart devices including P100, P105, P110 plugs and L530, L510E bulbs.
 
-This fork is designed to support the new authentication method and is currently compatible with the P100
-version 1.2.1. It also supports the old authentication method.
+**Compatibility:** Supports firmware version 1.2 and above with automatic fallback to older authentication methods.
 
-Most of the code originates from [OctoPrint-PSUControl-Tapo](https://github.com/dswd/OctoPrint-PSUControl-Tapo).
+> **Important:** For firmware 1.4.0 and above, you must enable "Third-Party Compatibility" in the Tapo app.
+>
+> Go to: **Me > Third-Party Services > Third-Party Compatibility** and toggle it on.
 
 ## Installation
 
@@ -15,6 +15,11 @@ PyP100 can be installed using the package manager [pip](https://pip.pypa.io/en/s
 ```bash
 pip install git+https://github.com/almottier/TapoP100.git@main
 ```
+
+> **Note:** If you previously installed PyP100 from another source, use `--force-reinstall` to ensure you get this version:
+> ```bash
+> pip install --force-reinstall git+https://github.com/almottier/TapoP100.git@main
+> ```
 
 ## Usage
 
@@ -81,6 +86,8 @@ If you call `getEnergyData` function, power consumption could be collected per `
 Contributions are always welcome!
 
 Please submit a pull request or open an issue for any changes.
+
+Thanks to [OctoPrint-PSUControl-Tapo](https://github.com/dswd/OctoPrint-PSUControl-Tapo) project.
 
 ## License
 
