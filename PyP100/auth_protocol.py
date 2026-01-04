@@ -69,7 +69,7 @@ class AuthProtocol:
 
     def _encrypt(self, data: bytes):
         self.seq += 1
-        seq = self.seq.to_bytes(4, "big", signed=True)
+        seq = self.seq.to_bytes(4, "big", signed=False)
         # Add PKCS#7 padding
         pad_l = 16 - (len(data) % 16)
         data = data + bytes([pad_l] * pad_l)
@@ -82,7 +82,7 @@ class AuthProtocol:
 
     def _decrypt(self, data: bytes):
         # Decrypt data with key
-        seq = self.seq.to_bytes(4, "big", signed=True)
+        seq = self.seq.to_bytes(4, "big", signed=False)
         crypto = AES.new(self.key, AES.MODE_CBC, self.iv + seq)
         data = crypto.decrypt(data[32:])
 
@@ -112,7 +112,7 @@ class AuthProtocol:
         self.key = sha256(b"lsk" + local_seed + remote_seed + auth_hash)[:16]
         ivseq = sha256(b"iv" + local_seed + remote_seed + auth_hash)
         self.iv = ivseq[:12]
-        self.seq = int.from_bytes(ivseq[-4:], "big", signed=True)
+        self.seq = int.from_bytes(ivseq[-4:], "big", signed=False)
         self.sig = sha256(b"ldk" + local_seed + remote_seed + auth_hash)[:28]
         log.debug(f"Initialized")
 
